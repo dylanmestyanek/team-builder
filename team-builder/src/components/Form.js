@@ -19,7 +19,8 @@ const Form = props => {
             name: '',
             email: '',
             role: ''
-        })
+        });
+        props.setTeamList([...props.teamList, user])
         console.log(user);
     };
  
