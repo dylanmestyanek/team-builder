@@ -1,4 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+
+const UserForm = styled.form`
+    background: pink;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 40%;
+
+    input {
+        margin: 5px 0 5px 5px;
+    }
+
+    label {
+        margin-left: 5px; 
+    }
+`;
+
 
 const Form = props => {
     const [user, setUser] = useState({
@@ -6,6 +24,10 @@ const Form = props => {
         email: '',
         role: ''
     })
+
+    useEffect(() => {
+        setUser(props.memberToEdit)
+    }, [props.memberToEdit]);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -21,11 +43,10 @@ const Form = props => {
             role: ''
         });
         props.setTeamList([...props.teamList, user])
-        console.log(user);
     };
  
     return (
-        <form onSubmit={(event) => handleSubmit(event)}>
+        <UserForm onSubmit={(event) => handleSubmit(event)}>
             <label>
                 Name:
                 <input 
@@ -54,7 +75,7 @@ const Form = props => {
                 />
             </label>
             <button>Submit!</button>
-        </form>
+        </UserForm>
     );   
 }
 
