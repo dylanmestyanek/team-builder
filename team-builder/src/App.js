@@ -3,16 +3,11 @@ import './App.css';
 import styled from "styled-components";
 
 import Form from "./components/Form";
-
-const UserCard = styled.div`
-   background: pink;
-   
-`;
-
+import Member from "./components/Member";
 
 function App() {
   const [teamList, setTeamList] = useState([]);
-  const [memberToEdit, setMemberToEdit] = useState(false);
+  const [memberToEdit, setMemberToEdit] = useState('');
 
   const addNewMember = member => {
     const newMember = {
@@ -21,33 +16,22 @@ function App() {
       email: member.email,
       role: member.role
     }
-    console.log(newMember.id)
     setTeamList([...teamList, newMember]);
-  };
-
-  const editMember = (user) => {
-    let editedMember = teamList.map((member, index) => member.id === user.id ? user : null);
-    editedMember = {
-      name: user.name,
-      email: user.email,
-      role: user.role
-    }
-    // setTeamList([...teamList, editedMember])
   };
 
   return (
     <div className="App">
+      <Form 
+        addNewMember={addNewMember}
+      />
+
       Users:
       {
         teamList.map(member => 
-          <UserCard>
-            <p>Name: {member.name}</p>
-            <p>E-Mail: {member.email}</p>
-            <p>Role: {member.role} </p>
-            <button onClick={() => setMemberToEdit(member)}>Edit</button>
-          </UserCard>)
+          <Member member={member} setMemberToEdit={setMemberToEdit} />
+        )
       }
-      <Form addNewMember={addNewMember} memberToEdit={memberToEdit} editMember={editMember}/>
+      
     </div>
   );
 }

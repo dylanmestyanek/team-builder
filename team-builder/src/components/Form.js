@@ -17,19 +17,13 @@ const UserForm = styled.form`
     }
 `;
 
-
 const Form = props => {
-    const [user, setUser] = useState({
+    const [user, setUser] = useState(props.member || {
         id: '',
         name: '',
         email: '',
         role: ''
     })
-
-    useEffect(() => {
-        setUser(props.memberToEdit);
-        
-    }, [props.memberToEdit]);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -39,7 +33,7 @@ const Form = props => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.memberToEdit 
+        props.member 
             ? props.editMember(user)
             : props.addNewMember(user);
         setUser({
