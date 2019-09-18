@@ -12,7 +12,23 @@ const UserCard = styled.div`
 
 function App() {
   const [teamList, setTeamList] = useState([]);
-  const [memberToEdit, setMemberToEdit] = useState({});
+  const [memberToEdit, setMemberToEdit] = useState(false);
+
+  const addNewMember = member => {
+    const newMember = {
+      id: Date.now(),
+      name: member.name,
+      email: member.email,
+      role: member.role
+    }
+    console.log(newMember.id)
+    setTeamList([...teamList, newMember]);
+  };
+
+  const editMember = (user) => {
+    const editingMember = teamList.map(member => member.id === user.id ? member : null)[0];
+    console.log(teamList)
+  };
 
   return (
     <div className="App">
@@ -26,7 +42,7 @@ function App() {
             <button onClick={() => setMemberToEdit(member)}>Edit</button>
           </UserCard>)
       }
-      <Form setTeamList={setTeamList} teamList={teamList} memberToEdit={memberToEdit} />
+      <Form addNewMember={addNewMember} memberToEdit={memberToEdit} editMember={editMember}/>
     </div>
   );
 }

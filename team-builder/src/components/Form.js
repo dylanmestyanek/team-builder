@@ -20,13 +20,15 @@ const UserForm = styled.form`
 
 const Form = props => {
     const [user, setUser] = useState({
+        id: '',
         name: '',
         email: '',
         role: ''
     })
 
     useEffect(() => {
-        setUser(props.memberToEdit)
+        setUser(props.memberToEdit);
+        
     }, [props.memberToEdit]);
 
     const handleChange = (event) => {
@@ -37,12 +39,14 @@ const Form = props => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        props.memberToEdit 
+            ? props.editMember(user)
+            : props.addNewMember(user);
         setUser({
             name: '',
             email: '',
             role: ''
         });
-        props.setTeamList([...props.teamList, user])
     };
  
     return (
