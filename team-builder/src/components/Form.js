@@ -4,12 +4,13 @@ import styled from "styled-components";
 const UserForm = styled.form`
     background: pink;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 40%;
+    justify-content: center;
+    align-items: center;
 
     input {
         margin: 5px 0 5px 5px;
+        width: 300px;
+        padding: 4px;
     }
 
     label {

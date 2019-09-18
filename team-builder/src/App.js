@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import './App.css';
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 import Form from "./components/Form";
 import Member from "./components/Member";
+
+const GlobalStyle = createGlobalStyle`
+  input {
+    border: none;
+    background: tan;
+    border-radius: 5px;
+  }
+`;
 
 function App() {
   const [teamList, setTeamList] = useState([]);
@@ -21,11 +30,13 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalStyle />
+      <h1>Add Member</h1>
       <Form 
         addNewMember={addNewMember}
       />
 
-      Users:
+      <h2>Team Members:</h2>
       {
         teamList.map(member => 
           <Member member={member} setMemberToEdit={setMemberToEdit} />
