@@ -26,8 +26,13 @@ function App() {
   };
 
   const editMember = (user) => {
-    const editingMember = teamList.map(member => member.id === user.id ? member : null)[0];
-    console.log(teamList)
+    let editedMember = teamList.map((member, index) => member.id === user.id ? user : null);
+    editedMember = {
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }
+    // setTeamList([...teamList, editedMember])
   };
 
   return (
